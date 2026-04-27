@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>My Personal Space</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+</nav>
+
+<section class="home">
+    <h2>My Blog</h2>
+
+    <div class="post">
+        <input id="titleInput" placeholder="Post title">
+        <textarea id="contentInput" placeholder="Write your post..."></textarea>
+        <button onclick="addPost()">Add Post</button>
+    </div>
+
+    <div id="blogList"></div>
+</section>
+
+<script>
+function addPost() {
+    let title = document.getElementById("titleInput");
+    let content = document.getElementById("contentInput");
+    let list = document.getElementById("blogList");
+
+    if (title.value.trim() === "" || content.value.trim() === "") return;
+
+    let post = document.createElement("div");
+    post.className = "post";
+
+    post.innerHTML = `
+        <h3>${title.value}</h3>
+        <p>${content.value}</p>
+        <button onclick="deletePost(this)">Delete</button>
+    `;
+
+    list.appendChild(post);
+
+    savePosts();
+
+    title.value = "";
+    content.value = "";
+}
+
+function deletePost(btn) {
+    btn.parentElement.remove();
+    savePosts();
+}
+
+function savePosts() {
+    localStorage.setItem("blogs", document.getElementById("blogList").innerHTML);
+}
+
+function loadPosts() {
+    document.getElementById("blogList").innerHTML =
+        localStorage.getItem("blogs") || "";
+}
+
+window.onload = loadPosts;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+        }
+
+        .dashboard {
+            max-width: 800px;
+            margin: 80px auto;
+            text-align: center;
+        }
+
+        .card {
+            display: inline-block;
+            margin: 15px;
+            padding: 25px;
+            width: 180px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: #ffe6f0;
+        }
+
+        .topbar {
+            text-align: right;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div class="dashboard">
+    <h2>Welcome Admin 💖</h2>
+    <p>Manage your personal website</p>
+
+    <div class="card" onclick="location.href='index.html'">🏠 Home</div>
+    <div class="card" onclick="location.href='blog.html'">📝 Blog</div>
+    <div class="card" onclick="location.href='photos.html'">📸 Photos</div>
+    <div class="card" onclick="location.href='learn.html'">📚 Learned</div>
+
+</div>
+
+<script>
+// 🔒 Block direct access (must be logged in first)
+if (sessionStorage.getItem("admin") !== "true") {
+    window.location.href = "admin.html";
+}
+
+// 🚪 Logout function
+function logout() {
+    sessionStorage.removeItem("admin");
+    window.location.href = "admin.html";
+}
+</script></script>
+
+</body>
+</html>
